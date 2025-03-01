@@ -7,11 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.breakroom.breakroom.models.User;
 
-
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
-	User findByUsername(String username);
-	User findByEmail(String email);
+	Optional<User> findByUsername(String username);
+	Optional<User> findByEmail(String email);
 	Boolean existsByUsername(String username);
 	Boolean existsByEmail(String email);
 

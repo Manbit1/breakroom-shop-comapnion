@@ -2,15 +2,14 @@ package com.breakroom.breakroom.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 
 @Entity
@@ -34,9 +33,14 @@ public class User {
 	private String email;
 
 	@NotBlank
-	@JsonIgnore
 	@Size(max = 100)
 	private String password;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user-role",
+	joinColumns = @JoinColumn(name = "User-id"),
+	inverseJoinColumns = @JoinColumn(name = "role-id"))
+	private Set<Roles> roles = new HashSet<>();
 	
 	
 	
@@ -45,11 +49,16 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
-	
-	
-	
-	
-	
+
+
+	public Set<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Roles> roles) {
+		this.roles = roles;
+	}
+
 	public Long getId() {
 		return id;
 	}
