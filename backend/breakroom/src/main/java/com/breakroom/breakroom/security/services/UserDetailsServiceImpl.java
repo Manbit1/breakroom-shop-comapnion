@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
+//this class is for security and should not be touched if there is no problem with it
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired

@@ -7,9 +7,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Entity
@@ -37,11 +35,24 @@ public class User {
 	private String password;
 
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user-role",
-	joinColumns = @JoinColumn(name = "User-id"),
-	inverseJoinColumns = @JoinColumn(name = "role-id"))
+	@JoinTable(  name = "user_roles",
+			joinColumns = @JoinColumn(name = "user_id"),
+			inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Roles> roles = new HashSet<>();
-	
+
+
+	@OneToMany(mappedBy = "orders")
+	private List<Order> orderList;
+
+	@OneToMany(mappedBy = "inventory")
+	private List<Inventory> inventory;
+
+	@OneToMany(mappedBy = "tickets")
+	private Set<Ticket> tickets;
+
+	public User(){
+
+	}
 	
 	
 	public User(String username, String email, String password) {
@@ -91,5 +102,27 @@ public class User {
 		this.password = password;
 	}
 
+	public List<Order> getOrderList() {
+		return orderList;
+	}
 
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
+	}
+
+	public List<Inventory> getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(List<Inventory> inventory) {
+		this.inventory = inventory;
+	}
+
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(Set<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 }

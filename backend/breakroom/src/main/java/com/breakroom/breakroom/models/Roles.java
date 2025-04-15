@@ -9,8 +9,8 @@ public class Roles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer Id;
 
-    @Enumerated
-    @Column(length = 20)
+    @Enumerated(EnumType.STRING)
+    @Column(length = 30)
     private ERoles name;
 
     public Roles(){

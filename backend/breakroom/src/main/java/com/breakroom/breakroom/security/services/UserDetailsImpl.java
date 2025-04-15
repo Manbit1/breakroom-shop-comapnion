@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//this class is for security and should not be touched if there is no problem with it
 public class UserDetailsImpl implements UserDetails {
 
     private Long id;
