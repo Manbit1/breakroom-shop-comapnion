@@ -2,6 +2,8 @@ package com.breakroom.breakroom.models;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Table(name = "tickets")
 @Entity
 public class Ticket {
@@ -10,23 +12,26 @@ public class Ticket {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "order")
+    @JoinColumn(name = "referenced_order")
     private Order order;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ticketStatus")
     private TicketStatusEntity ticketStatus;
 
+    private Date ticketDate;
+
     @Column(length = 300)
     private String ticketDetails;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "referenced_user")
     private User user;
 
-    public Ticket(Order order, String ticketDetails) {
+    public Ticket(Order order, String ticketDetails, Date ticketDate) {
         this.order = order;
         this.ticketDetails = ticketDetails;
+        this.ticketDate=ticketDate;
     }
 
     public Long getId() {
@@ -43,6 +48,14 @@ public class Ticket {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Date getTicketDate() {
+        return ticketDate;
+    }
+
+    public void setTicketDate(Date ticketDate) {
+        this.ticketDate = ticketDate;
     }
 
     public TicketStatusEntity getTicketStatus() {

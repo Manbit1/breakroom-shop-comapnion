@@ -24,20 +24,20 @@ public class Order {
     private Buyer buyer;
 
 
-    @OneToMany(mappedBy = "inventory")
+    @OneToMany(mappedBy = "order")
     private Set<Inventory> boughtItems;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "referenced_user")
     private User user;
 
-    @OneToOne(mappedBy = "tickets")
+    @OneToOne(mappedBy = "order")
     private Ticket ticket;
 
-    public Order(OrderStatusEntity orderStatus, Buyer buyer,Set<Inventory> boughtItems) {
-        this.orderStatus = orderStatus;
+    public Order( Buyer buyer,Set<Inventory> boughtItems, Date orderDate) {
         this.buyer = buyer;
         this.boughtItems = boughtItems;
+        this.orderDate=orderDate;
     }
 
     public Long getId() {

@@ -20,12 +20,20 @@ public class Inventory {
     private int serialNum;
 
     @ManyToOne
-    @JoinColumn(name = "order")
+    @JoinColumn(name = "referenced_order")
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "referenced_user")
     private User user;
+
+
+
+    public Inventory(String itemName, int itemAmount, int serialNum) {
+        this.itemName = itemName;
+        this.itemAmount = itemAmount;
+        this.serialNum = serialNum;
+    }
 
     public Order getOrder() {
         return order;
@@ -33,12 +41,6 @@ public class Inventory {
 
     public void setOrder(Order order) {
         this.order = order;
-    }
-
-    public Inventory(String itemName, int itemAmount, int serialNum) {
-        this.itemName = itemName;
-        this.itemAmount = itemAmount;
-        this.serialNum = serialNum;
     }
 
     public Long getId() {

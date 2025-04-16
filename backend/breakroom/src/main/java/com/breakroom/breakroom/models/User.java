@@ -41,13 +41,13 @@ public class User {
 	private Set<Roles> roles = new HashSet<>();
 
 
-	@OneToMany(mappedBy = "orders")
+	@OneToMany(mappedBy = "user")
 	private List<Order> orderList;
 
-	@OneToMany(mappedBy = "inventory")
+	@OneToMany(mappedBy = "user")
 	private List<Inventory> inventory;
 
-	@OneToMany(mappedBy = "tickets")
+	@OneToMany(mappedBy = "user")
 	private Set<Ticket> tickets;
 
 	public User(){

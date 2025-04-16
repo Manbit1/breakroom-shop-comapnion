@@ -26,7 +26,7 @@ public class Buyer {
 
     private int buyerPhoneNumber;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "buyer")
     private List<Order> orders;
 
     public Buyer(String buyerName, String buyerEmail, int buyerPhoneNumber) {
